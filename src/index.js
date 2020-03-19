@@ -1,5 +1,6 @@
 import { getMovieNames } from "./movie.service";
+import { drawInit } from "./draw-functions";
 
 getMovieNames().then(movies => {
-    console.log(movies);
+    drawInit(document.body, movies);
 });
