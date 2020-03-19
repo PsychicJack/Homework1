@@ -1,0 +1,64 @@
+{
+    "movies": [
+        {
+            "id": 1,
+            "name": "The Irishman",
+            "genre": ["Biography", "Crime", "Drama"],
+            "year": 2019,
+            "actors": [
+                {
+                    "actorName": "Robert De Niro",
+                    "characterName": "Frank Sheeran"
+                },
+                {
+                    "actorName": "Al Pacino",
+                    "characterName": "Jimmy Hoffa"
+                },
+                {
+                    "actorName": "Joe Pesci",
+                    "characterName": "Russell Bufalino"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Black Panther",
+            "genre": ["Action", "Adventure", "Sci-Fi"],
+            "year": 2018,
+            "actors": [
+                {
+                    "actorName": "Chadwick Boseman",
+                    "characterName": "T'Challa / Black Panthe"
+                },
+                {
+                    "actorName": "Michael B. Jordan",
+                    "characterName": "Erik Killmonger"
+                },
+                {
+                    "actorName": "Lupita Nyong'o",
+                    "characterName": "Nakia"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Inception",
+            "genre": ["Action", "Adventure", "Sci-Fi"],
+            "year": 2010,
+            "actors": [
+                {
+                    "actorName": "Leonardo DiCaprio",
+                    "characterName": "Cobb"
+                },
+                {
+                    "actorName": "Joseph Gordon-Levitt",
+                    "characterName": "Arthur"
+                },
+                {
+                    "actorName": "Ellen Page",
+                    "characterName": "Ariadne"
+                }
+            ]
+        }
+    ]
+}
