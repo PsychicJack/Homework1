@@ -45,8 +45,8 @@ export function drawInit(host, data) {
 function drawMovieDetails(host, movieDetails) {
     const div = host.appendChild(document.createElement("div"));
     div.classList.add("movie-details");
-    div.appendChild(document.createTextNode(movieDetails.genre.join(", ")));
-    div.appendChild(document.createTextNode(`year: ${movieDetails.year}`));
+    div.appendChild(document.createElement("div")).appendChild(document.createTextNode(movieDetails.genre.join(", ")));
+    div.appendChild(document.createElement("div")).appendChild(document.createTextNode(`year: ${movieDetails.year}`));
 }
 
 function drawMovieActors(host, actors) {
