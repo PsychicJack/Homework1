@@ -35,12 +35,18 @@ function getActor(id) {
     });
 }
 
-export function getActors(MovieId) {
-    const testArray = [4, 5, 6];
+function getActorsOnAMovie(movieId) {
+    return new Promise((resolve, reject) => {
+        return resolve(
+            fetch(`${URL_ACTEDIN}?movieId=${movieId}`).then(result =>
+                result.json().then(data => data.map(el => el.actorId))
+            )
+        );
+    });
+}
 
-    return Promise.all([
-        getActor(testArray[0]),
-        getActor(testArray[1]),
-        getActor(testArray[2])
-    ]);
+export function getActors(movieId) {
+    return getActorsOnAMovie(movieId).then(result =>
+        Promise.all(result.map(el => getActor(el)))
+    );
 }
