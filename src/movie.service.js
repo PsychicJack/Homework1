@@ -26,3 +26,21 @@ export function getMovie(id) {
         );
     });
 }
+
+function getActor(id) {
+    return new Promise((resolve, reject) => {
+        return resolve(
+            fetch(`${URL_ACTORS}/${id}`).then(result => result.json())
+        );
+    });
+}
+
+export function getActors(MovieId) {
+    const testArray = [4, 5, 6];
+
+    return Promise.all([
+        getActor(testArray[0]),
+        getActor(testArray[1]),
+        getActor(testArray[2])
+    ]);
+}
