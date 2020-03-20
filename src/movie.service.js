@@ -30,7 +30,7 @@ export function getMovie(id) {
 function getActor(id) {
     return new Promise((resolve, reject) => {
         return resolve(
-            fetch(`${URL_ACTORS}/${id}`).then(result => result.json())
+            fetch(`${URL_ACTORS}/${id}`).then(result => result.json().then(el => el.name))
         );
     });
 }

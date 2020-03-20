@@ -1,4 +1,4 @@
-import { getMovie } from "./movie.service";
+import { getMovie, getActors } from "./movie.service";
 
 export function drawInit(host, data) {
     data.forEach(el => {
@@ -10,20 +10,47 @@ export function drawInit(host, data) {
         hidden.value = el.id;
         const button = div.appendChild(document.createElement("button"));
         button.classList.add("expand-details");
+        const content = div.appendChild(document.createElement("div"));
+        content.classList.add("content");
         button.onclick = () => {
-            getMovie(
-                button.parentNode.querySelector("input[type=hidden]").value
-            ).then(movie => {
-                drawMovieDetails(button.parentNode, movie);
-            });
+            if (button.innerHTML == "▼") {
+                content.classList.remove("hidden-div");
+                button.innerHTML = "▲";
+                getMovie(
+                    button.parentNode.querySelector("input[type=hidden]").value
+                ).then(movie => {
+                    drawMovieDetails(
+                        button.parentNode.querySelector(".content"),
+                        movie
+                    );
+                });
+                getActors(
+                    button.parentNode.querySelector("input[type=hidden]").value
+                ).then(actors => {
+                    drawMovieActors(
+                        button.parentNode.querySelector(".content"),
+                        actors
+                    );
+                });
+            } else {
+                content.classList.add("hidden-div");
+                content.innerHTML = "";
+                button.innerHTML = "▼";
+            }
         };
         button.innerHTML = "▼";
     });
 }
 
-export function drawMovieDetails(host, data) {
+function drawMovieDetails(host, movieDetails) {
     const div = host.appendChild(document.createElement("div"));
     div.classList.add("movie-details");
-    div.appendChild(document.createTextNode(data.genre.join(", ")));
-    div.appendChild(document.createTextNode(`year: ${data.year}`));
+    div.appendChild(document.createTextNode(movieDetails.genre.join(", ")));
+    div.appendChild(document.createTextNode(`year: ${movieDetails.year}`));
+}
+
+function drawMovieActors(host, actors) {
+    const div = host.appendChild(document.createElement("div"));
+    div.classList.add("movie-actors");
+    div.appendChild(document.createTextNode(`Actors: ${actors.join(", ")}`));
 }
