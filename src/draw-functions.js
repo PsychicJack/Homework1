@@ -1,6 +1,6 @@
+import { getMovie } from "./movie.service";
 
-export function drawInit(host, data)
-{
+export function drawInit(host, data) {
     data.forEach(el => {
         const div = host.appendChild(document.createElement("div"));
         div.classList.add("movie-name");
@@ -10,13 +10,20 @@ export function drawInit(host, data)
         hidden.value = el.id;
         const button = div.appendChild(document.createElement("button"));
         button.classList.add("expand-details");
-        button.onclick = () => { console.log("expand")};
+        button.onclick = () => {
+            getMovie(
+                button.parentNode.querySelector("input[type=hidden]").value
+            ).then(movie => {
+                drawMovieDetails(button.parentNode, movie);
+            });
+        };
         button.innerHTML = "▼";
-    });   
+    });
 }
 
-export function drawMovieDetails(host, data)
-{
+export function drawMovieDetails(host, data) {
     const div = host.appendChild(document.createElement("div"));
     div.classList.add("movie-details");
+    div.appendChild(document.createTextNode(data.genre.join(", ")));
+    div.appendChild(document.createTextNode(`year: ${data.year}`));
 }
