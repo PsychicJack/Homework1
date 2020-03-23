@@ -12,26 +12,35 @@ export function drawInit(host, data) {
         button.classList.add("expand-details");
         const content = div.appendChild(document.createElement("div"));
         content.classList.add("content");
-        button.onclick = () => {
+        button.onclick = async function() {
             if (button.innerHTML == "▼") {
                 content.classList.remove("hidden-div");
                 button.innerHTML = "▲";
-                getMovie(
+                const movie = await getMovie(
                     button.parentNode.querySelector("input[type=hidden]").value
-                ).then(movie => {
+                ); /*.then(movie => {
                     drawMovieDetails(
                         button.parentNode.querySelector(".content"),
                         movie
                     );
-                });
-                getActors(
+                });*/
+
+                const actors = await getActors(
                     button.parentNode.querySelector("input[type=hidden]").value
-                ).then(actors => {
+                ); /*.then(actors => {
                     drawMovieActors(
                         button.parentNode.querySelector(".content"),
                         actors
                     );
-                });
+                });*/
+                drawMovieDetails(
+                    button.parentNode.querySelector(".content"),
+                    movie
+                );
+                drawMovieActors(
+                    button.parentNode.querySelector(".content"),
+                    actors
+                );
             } else {
                 content.classList.add("hidden-div");
                 content.innerHTML = "";
@@ -45,8 +54,12 @@ export function drawInit(host, data) {
 function drawMovieDetails(host, movieDetails) {
     const div = host.appendChild(document.createElement("div"));
     div.classList.add("movie-details");
-    div.appendChild(document.createElement("div")).appendChild(document.createTextNode(movieDetails.genre.join(", ")));
-    div.appendChild(document.createElement("div")).appendChild(document.createTextNode(`year: ${movieDetails.year}`));
+    div.appendChild(document.createElement("div")).appendChild(
+        document.createTextNode(movieDetails.genre.join(", "))
+    );
+    div.appendChild(document.createElement("div")).appendChild(
+        document.createTextNode(`year: ${movieDetails.year}`)
+    );
 }
 
 function drawMovieActors(host, actors) {
